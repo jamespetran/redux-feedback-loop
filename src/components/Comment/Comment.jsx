@@ -1,5 +1,5 @@
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -29,6 +29,11 @@ function Comment() {
         Any comments you would like to leave?
       </h1>
       <form className="form" onSubmit={handleSubmit}>
+        <div className="submit">
+          <Link to="/support">
+            <button value="PREV">PREV</button>
+          </Link>
+        </div>
         <div className="input-box">
           <h3 className="question">Comments?</h3>
           <textarea
@@ -36,7 +41,7 @@ function Comment() {
             cols="30"
             rows="6"
             value={commentInput}
-            onChange={evt => {setCommentInput(evt.target.value);}
+            onChange={evt => { setCommentInput(evt.target.value); }
             }
           ></textarea>
         </div>
@@ -44,7 +49,7 @@ function Comment() {
 
 
           <Link to="/support">
-            <input type="submit" value="NEXT" onClick={handleSubmit}/>
+            <button value="NEXT" onClick={handleSubmit}>NEXT</button>
           </Link>
         </div>
       </form>

@@ -20,16 +20,22 @@ function Support() {
     }
   }
 
-  return (  
+  return (
     <div id="support" className="page-content">
       <h1>
         How well are you being supported?
       </h1>
       <form className="form">
+        <div className="submit">
+          <Link to="/understand">
+            <button value="PREV">PREV</button>
+          </Link>
+        </div>
+
         <div className="input-box">
           <h3 className="question">Support?</h3>
-          <StarBar 
-            state= {supportValue}
+          <StarBar
+            state={supportValue}
             type_input="SUBMIT_SUPPORT"
           />
         </div>
@@ -37,7 +43,7 @@ function Support() {
 
 
           <Link to="/support">
-            <input type="submit" value="NEXT" onClick={handleSubmit}/>
+            <button value="NEXT" onClick={handleSubmit}>NEXT</button>
           </Link>
         </div>
       </form>

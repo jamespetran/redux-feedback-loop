@@ -20,14 +20,19 @@ function Understand() {
     }
   }
 
-  return (  
+  return (
     <div id="understand" className="page-content">
       <h1>How well are you understanding the content?</h1>
       <form className="form">
+        <div className="submit">
+          <Link to="/">
+            <button value="PREV">PREV</button>
+          </Link>
+        </div>
         <div className="input-box">
           <h3 className="question">Understanding?</h3>
-          <StarBar 
-            state= {understandValue}
+          <StarBar
+            state={understandValue}
             type_input="SUBMIT_UNDERSTAND"
           />
         </div>
@@ -35,12 +40,12 @@ function Understand() {
 
 
           <Link to="/support">
-            <input type="submit" value="NEXT" onClick={handleSubmit}/>
+            <button value="NEXT" onClick={handleSubmit}>NEXT</button>
           </Link>
         </div>
       </form>
     </div>
-    )
+  )
 }
 
 export default Understand

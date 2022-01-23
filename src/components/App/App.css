@@ -38,9 +38,9 @@ h4 {
   width: 100%;
 }
 .submit{
-  margin: auto 0 auto 25px;
+  margin: auto 25px auto 25px;
 }
-.submit input{
+.form button{
   /* this is the NEXT button */
 padding: 10px;
 }
