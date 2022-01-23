@@ -41,7 +41,7 @@ function App() {
 
 
       <br /><br /><br /><br /><br /><br /><br />
-      <p></p>// get rid of these in final product: 👇👆 
+      <p></p>// get rid of these in final product: 👈👇 
       <ol>
         <li>
           Navigation:
