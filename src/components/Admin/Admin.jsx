@@ -12,7 +12,8 @@ function Admin() {
   const feedbackList = useSelector(store => store.feedbackList);
   const dispatch = useDispatch();
 
-
+  // this is to render the columns with MUI DataGrid
+  // field values must match up with object key values
   const columns: GridColDef[] = [
     {
       field: 'feeling',
@@ -61,29 +62,32 @@ function Admin() {
     }
   ];
 
+  // this deletes the row with given id 
   const deleteRow = (id) => {
     axios.delete(`/api/feedback/${id}`)
-    .then(res => {
-      console.log("delete feedback success", res);
-      refreshList();
-    })
-    .catch(err => {
-      console.error('deleted feedback fail', err);
-    });
-}
+      .then(res => {
+        console.log("delete feedback success", res);
+        refreshList();
+      })
+      .catch(err => {
+        console.error('deleted feedback fail', err);
+      });
+  }
 
+  // GETs the feedback list from db
   const refreshList = () => {
     axios.get('/api/feedback')
-    .then(res => {
-      console.log(res.data);
-      dispatch({
-        type: 'REFRESH_LIST',
-        payload: res.data
+      .then(res => {
+        console.log(res.data);
+        // stores the data into state
+        dispatch({
+          type: 'REFRESH_LIST',
+          payload: res.data
+        })
       })
-    })
-    .catch(err => {
-      console.error('refresh feedback fail', err);
-    });
+      .catch(err => {
+        console.error('refresh feedback fail', err);
+      });
   }
 
   // trying to update the state of the data on the page
@@ -95,6 +99,7 @@ function Admin() {
       <div className="sub-heading">
         Feedback Results
       </div>
+      {/* much of this code is adapted from DataGrid guide on MUI website */}
       <Box
         ref={wrapper}
         sx={{
