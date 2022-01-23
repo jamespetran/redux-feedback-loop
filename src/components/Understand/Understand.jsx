@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 function Understand() {
   let understandValue = useSelector(store => store.understand);
   const history = useHistory();
+  const nothing = '';
 
 
   const handleSubmit = (event) => {
@@ -37,10 +38,9 @@ function Understand() {
           />
         </div>
         <div className="submit">
-
-
           <Link to="/support">
-            <button value="NEXT" onClick={handleSubmit}>NEXT</button>
+            {understandValue > 0 ? <button value="NEXT" onClick={handleSubmit}>
+              NEXT</button> : nothing}
           </Link>
         </div>
       </form>
