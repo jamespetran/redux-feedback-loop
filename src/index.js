@@ -6,8 +6,6 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
-import axios from 'axios';
-import { useEffect } from 'react';
 
 // feeling reducer
 const feeling = (state = -1, action) => {
@@ -18,6 +16,7 @@ const feeling = (state = -1, action) => {
   return state
 }
 
+// understand reducer
 const understand = (state = -1, action) => {
   switch (action.type) {
     case 'SUBMIT_UNDERSTAND':
@@ -26,6 +25,7 @@ const understand = (state = -1, action) => {
   return state
 }
 
+// support reducer
 const support = (state = -1, action) => {
   switch (action.type) {
     case 'SUBMIT_SUPPORT':
@@ -34,6 +34,7 @@ const support = (state = -1, action) => {
   return state
 }
 
+// comment reducer
 const comment = (state = "", action) => {
   switch (action.type) {
     case 'SUBMIT_COMMENT':
@@ -42,6 +43,7 @@ const comment = (state = "", action) => {
   return state
 }
 
+// feedback reducer - for individual feedback pieces
 const feedback = (state = [], action) => {
   switch (action.type) {
     case 'SUBMIT_FEEDBACK':
@@ -52,6 +54,7 @@ const feedback = (state = [], action) => {
   return state
 }
 
+// overall feedback list reducer, designed to hold all values of feedback
 const feedbackList = (state = [], action) => {
   switch (action.type) {
     case 'REFRESH_LIST':
@@ -59,8 +62,6 @@ const feedbackList = (state = [], action) => {
   }
   return state;
 }
-
-
 
 const store = createStore(
   combineReducers({
