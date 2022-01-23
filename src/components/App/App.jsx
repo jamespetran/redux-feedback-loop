@@ -18,7 +18,7 @@ function App() {
         <h4>Don't forget it!</h4>
 
       </header>
-
+      {/* router that renders based on page address entered into the app */}
       <Router>
         <Route path="/" exact>
           <Feeling />
@@ -38,6 +38,7 @@ function App() {
         <Route path="/thank-you" exact>
           <ThankYou />
         </Route>
+        {/* /admin is only shown if it is entered directly into the address bar, as there are no links to it */}
         <Route path="/admin" exact>
           <Admin />
         </Route>

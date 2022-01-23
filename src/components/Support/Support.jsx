@@ -35,6 +35,7 @@ function Support() {
 
         <div className="input-box">
           <h3 className="question">Support?</h3>
+          {/* star bar component has more explanation inside */}
           <StarBar
             state={supportValue}
             type_input="SUBMIT_SUPPORT"
@@ -44,6 +45,7 @@ function Support() {
 
 
           <Link to="/support">
+            {/* conditional rendering to show next button only if support value is selected */}
             {supportValue > 0 ? <button value="NEXT" onClick={handleSubmit}>
               NEXT</button> : nothing}
           </Link>

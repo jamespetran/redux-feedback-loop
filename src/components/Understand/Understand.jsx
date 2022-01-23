@@ -32,6 +32,7 @@ function Understand() {
         </div>
         <div className="input-box">
           <h3 className="question">Understanding?</h3>
+          {/* star bar component has more explanation inside */}
           <StarBar
             state={understandValue}
             type_input="SUBMIT_UNDERSTAND"
@@ -39,6 +40,7 @@ function Understand() {
         </div>
         <div className="submit">
           <Link to="/support">
+            {/* conditional rendering only if a value is selected for understand */}
             {understandValue > 0 ? <button value="NEXT" onClick={handleSubmit}>
               NEXT</button> : nothing}
           </Link>

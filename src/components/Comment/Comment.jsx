@@ -46,7 +46,7 @@ function Comment() {
         </div>
         <div className="submit">
 
-
+        {/* no conditional rendering needed, as the comments are not required */}
           <Link to="/support">
             <button value="NEXT" onClick={handleSubmit}>NEXT</button>
           </Link>
