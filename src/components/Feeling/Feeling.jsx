@@ -1,39 +1,46 @@
-import './Feeling.css';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
-import Rating from '@mui/material/Rating';
-import Box from '@mui/material/Box';
-import StarIcon from '@mui/icons-material/Star';
-import StarBar from '../StarBar/StarBar'
-
-import { useState } from 'react';
+import StarBar from '../StarBar/StarBar';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 
 function Feeling() {
+  let feelingValue = useSelector(store => store.feeling);
+  const history = useHistory();
 
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('submitting feeling',value);
+
+    if (feelingValue >0 ){
+    console.log('submitting feeling',feelingValue);
+    history.push('/understand');
+    } else {
+      alert('You must enter how you are feeling today to proceed')
+    }
     // dispatch  type:'SUBMIT_FEELING' payload: feelingValue
   }
 
 
   return (
-    <div id="feeling">
+    <div id="feeling" className="page-content">
       <h1>
         How are you feeling today?
       </h1>
-      <form id="feeling-form" onSubmit={handleSubmit}>
-        <div id="feeling-box">
-          <h3 id="feeling-question">Feeling?</h3>
-          <StarBar />
+      <form className="form">
+        <div className="input-box">
+          <h3 className="question">Feeling?</h3>
+          <StarBar 
+            state= {feelingValue}
+            type_input="SUBMIT_FEELING"
+          />
           {/* <input type="number" id="feeling-input" /> */}
         </div>
-        <div id="feeling-submit">
+        <div className="submit">
 
 
           <Link to="/understand">
-            <input type="submit" value="NEXT"/>
+            <input type="submit" value="NEXT" onClick={handleSubmit}/>
           </Link>
         </div>
       </form>

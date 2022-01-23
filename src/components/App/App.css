@@ -21,3 +21,36 @@
 h4 {
   font-style: italic;
 }
+
+
+.form{
+  display: flex;
+  flex-flow: row;
+  margin: auto;
+  width: fit-content;
+}
+.input-box{
+  display: flex;
+  flex-flow: column;
+  text-align: left;
+}
+.page-content{
+  width: 100%;
+}
+.submit{
+  margin: auto 0 auto 25px;
+}
+.submit input{
+  /* this is the NEXT button */
+padding: 10px;
+}
+.rating{
+  display: flex;
+  flex-direction: row;
+}
+.star-label{
+  margin: 5px;
+}
+.question{
+  margin: 0 auto 10px auto ;
+}

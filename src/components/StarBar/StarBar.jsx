@@ -1,13 +1,14 @@
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
-
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 
 
-function StarBar() {
+function StarBar({state, type_input}) {
+  const dispatch = useDispatch();
 
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(state);
   const [hover, setHover] = useState(-1);
 
   const labels = {
@@ -23,9 +24,13 @@ function StarBar() {
     <div className="rating">
       <Rating
         name="rating-bar"
-        value={value}
+        value={state}
         onChange={(event, newValue) => {
           setValue(newValue);
+          dispatch({
+            type: type_input,
+            payload: newValue,
+          })
         }}
         onChangeActive={(event, newHover) => {
           setHover(newHover);
@@ -33,7 +38,7 @@ function StarBar() {
         emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
       />
       {value !== null && (
-        <Box id="star-label">{labels[hover !== -1 ? hover : value]}</Box>
+        <Box className="star-label" >{labels[hover !== -1 ? hover : value]}</Box>
       )}
     </div>
 
