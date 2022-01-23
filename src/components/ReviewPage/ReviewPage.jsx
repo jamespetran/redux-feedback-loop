@@ -1,6 +1,10 @@
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2'
+
+
 
 
 function Review() {
@@ -9,45 +13,64 @@ function Review() {
   const support = useSelector(store => store.support);
   const comment = useSelector(store => store.comment);
   const dispatch = useDispatch();
+  const history = useHistory();
 
+  const clearInputs = () => {
+    dispatch({
+      type: 'SUBMIT_FEELING',
+      payload: -1,
+    })
+    dispatch({
+      type: 'SUBMIT_UNDERSTAND',
+      payload: -1,
+    })
+    dispatch({
+      type: 'SUBMIT_SUPPORT',
+      payload: -1,
+    })
+    dispatch({
+      type: 'SUBMIT_COMMENT',
+      payload: "",
+    })
+  } 
 
   const handleSubmit = () => {
-    if( feeling > 0 && understand > 0 && support > 0){
-      const feedback={
+    if (feeling > 0 && understand > 0 && support > 0) {
+      const feedback = {
         feeling,
         understand,
         support,
         comment
       };
       console.log(feedback);
-      axios.post('/api/feedback',feedback)
+      axios.post('/api/feedback', feedback)
         .then(response => {
           console.log('success POST feedback', response);
-          dispatch({
-            type: 'SUBMIT_FEELING',
-            payload: -1,
-          })
-          dispatch({
-            type: 'SUBMIT_UNDERSTAND',
-            payload: -1,
-          })
-          dispatch({
-            type: 'SUBMIT_SUPPORT',
-            payload: -1,
-          })
-          dispatch({
-            type: 'SUBMIT_COMMENT',
-            payload: "",
-          })
+          clearInputs();
           history.push('/thank-you');
         })
         .catch(err => {
-          console.error('error in POST feedback',err)
+          console.error('error in POST feedback', err)
         })
+    } else {
+      Swal.fire({
+        title: 'Error!',
+        text: 'One or more values has an invalid input. Go back to beginning of form?',
+        icon: "error",
+        confirmButtonText: 'yes',
+        showCancelButton: 'no',
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          console.log('confirmed')
+          clearInputs();
+          history.push('/');
+        };
+      });
     }
   }
 
-  return( 
+  return (
     <div id="review">
       <h1>Review Your Feedback</h1>
       <h3>Feelings: {feeling}</h3>
