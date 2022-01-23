@@ -17,37 +17,6 @@ function App() {
         <h4>Don't forget it!</h4>
 
       </header>
-        <ol>
-          <li>
-            Navigation:
-            <ol>
-              <li>
-                feeling
-              </li>
-              <li>
-                understand
-              </li>
-              <li>
-                supported
-              </li>
-              <li>
-                comments
-              </li>
-              <li>
-                review
-              </li>
-              <li>
-                thank you
-              </li>
-            </ol>
-          </li>
-          <li>
-            input validation
-          </li>
-          <li>
-            POST to database
-          </li>
-        </ol>
 
         <Router>
           <Route path="/" exact>
@@ -69,6 +38,18 @@ function App() {
             <ThankYou />
           </Route>
         </Router>
+
+        <ol>
+          <li>
+            Navigation:
+          </li>
+          <li>
+            input validation
+          </li>
+          <li>
+            POST to database
+          </li>
+        </ol>
 
     </div>
   );
