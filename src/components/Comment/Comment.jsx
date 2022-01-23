@@ -6,15 +6,15 @@ import { useState } from 'react';
 
 
 function Comment() {
-  const commentValue = useSelector(store => store.comment)
-  const [commentInput, setCommentInput] = useState(commentValue)
+  const commentValue = useSelector(store => store.comment);
+  const [commentInput, setCommentInput] = useState(commentValue);
   const history = useHistory();
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log('submitting comment', commentInput);
+    console.log('submitting comment:', commentInput);
     dispatch({
       type: "SUBMIT_COMMENT",
       payload: commentInput,
@@ -28,7 +28,7 @@ function Comment() {
       <h1>
         Any comments you would like to leave?
       </h1>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <div className="input-box">
           <h3 className="question">Comments?</h3>
           <textarea
@@ -44,7 +44,7 @@ function Comment() {
 
 
           <Link to="/support">
-            <input type="submit" value="NEXT" onClick={handleSubmit} />
+            <input type="submit" value="NEXT" onClick={handleSubmit}/>
           </Link>
         </div>
       </form>
