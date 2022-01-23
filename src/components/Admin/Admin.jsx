@@ -4,15 +4,16 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import { useSelector } from 'react-redux';
+import Button from '@mui/material/Button'
 
 function Admin() {
-  const [rows, setRows] = useState([]);  
+  const [rows, setRows] = useState([]);
   const wrapper = React.useRef(null);
   const feedback = useSelector(store => store.feedback);
 
 
 
-  const columns = [
+  const columns: GridColDef[] = [
     {
       field: 'feeling',
       headerName: 'Feeling',
@@ -41,13 +42,34 @@ function Admin() {
       width: 250,
       sortable: false,
     },
+    // delete code below is adapted from https://stackoverflow.com/a/64331367
     {
       field: 'delete',
       headerName: 'Delete',
       width: 100,
       sortable: false,
-    },
+      renderCell: (params) => {
+        const onDelete = (e) => {
+          e.stopPropagation(); // don't select this row after clicking
+          console.log(params.id);
+          deleteRow(params.id);
+        };
+
+        return <Button onClick={onDelete}>Delete</Button>;
+
+      },
+    }
   ];
+
+  const deleteRow = (id) => {
+    axios.delete(`/api/feedback/${id}`)
+      .then( res =>{
+        console.log("delete feedback success",res);
+      })
+      .catch(err => {
+        console.error('deleted feedback fail', err);
+      });
+  }
 
   const updateData = () => {
     axios.get('/api/feedback')
