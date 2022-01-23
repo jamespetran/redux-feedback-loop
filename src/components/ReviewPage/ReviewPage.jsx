@@ -4,10 +4,8 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Grid from '@mui/material/Grid';
-
-
-
-
+import StarBar from '../StarBar/StarBar';
+import { useState } from 'react';
 
 function Review() {
   const feeling = useSelector(store => store.feeling);
@@ -16,6 +14,20 @@ function Review() {
   const comment = useSelector(store => store.comment);
   const dispatch = useDispatch();
   const history = useHistory();
+  const [commentInput, setCommentInput] = useState(comment);
+  const [editComment, setEditComment] = useState(false);
+
+
+  const submitComment = (event) => {
+    console.log('submitting comment:', commentInput);
+    dispatch({
+      type: "SUBMIT_COMMENT",
+      payload: commentInput,
+    })
+    setEditComment(false);
+  }
+
+
 
   const clearInputs = () => {
     dispatch({
@@ -34,7 +46,7 @@ function Review() {
       type: 'SUBMIT_COMMENT',
       payload: "",
     })
-  } 
+  }
 
   const handleSubmit = () => {
     if (feeling > 0 && understand > 0 && support > 0) {
@@ -62,13 +74,13 @@ function Review() {
         confirmButtonText: 'yes',
         showCancelButton: 'no',
       })
-      .then((result) => {
-        if (result.isConfirmed) {
-          console.log('confirmed')
-          clearInputs();
-          history.push('/');
-        };
-      });
+        .then((result) => {
+          if (result.isConfirmed) {
+            console.log('confirmed')
+            clearInputs();
+            history.push('/');
+          };
+        });
     }
   }
 
@@ -76,10 +88,53 @@ function Review() {
     <div id="review">
       <h1>Review Your Feedback</h1>
       <h3>Feelings: {feeling}</h3>
+      <div className="form">
+        <div className="input-box">
+          <StarBar
+            state={feeling}
+            type_input="SUBMIT_FEELING"
+          />
+        </div>
+      </div>
       <h3>Understanding: {understand}</h3>
+      <div className="form">
+        <div className="input-box">
+          <StarBar
+            state={understand}
+            type_input="SUBMIT_UNDERSTAND"
+          />
+        </div>
+      </div>
       <h3>Support: {support}</h3>
-      <h3>Comments: {comment}</h3>
-      <button onClick={handleSubmit}>SUBMIT</button>
+      <div className="form">
+        <div className="input-box">
+          <StarBar
+            state={support}
+            type_input="SUBMIT_SUPPORT"
+          />
+        </div>
+      </div>
+
+      <h3>Comments: </h3>
+
+
+      {editComment ?
+        <div className="form">
+          <textarea
+            name="Text1"
+            cols="30"
+            rows="6"
+            value={commentInput}
+            onChange={evt => { setCommentInput(evt.target.value); }}
+          />
+          <button onClick={evt => submitComment()}>Set Comment</button>
+        </div>
+        :<div>
+        {comment == "" ? <h5 onClick={evt => setEditComment(true)}>No comments submitted.</h5> : <h5 onClick={evt => setEditComment(true)}>{comment}</h5>}
+        <button onClick={handleSubmit}>SUBMIT</button>
+        </div>
+      }
+      
     </div>
   )
 }

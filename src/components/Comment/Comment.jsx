@@ -41,9 +41,8 @@ function Comment() {
             cols="30"
             rows="6"
             value={commentInput}
-            onChange={evt => { setCommentInput(evt.target.value); }
-            }
-          ></textarea>
+            onChange={evt => { setCommentInput(evt.target.value); }}
+          />
         </div>
         <div className="submit">
 
