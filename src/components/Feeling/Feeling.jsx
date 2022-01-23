@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 function Feeling() {
   let feelingValue = useSelector(store => store.feeling);
   const history = useHistory();
+  const nothing = '';
 
 
   const handleSubmit = (event) => {
@@ -38,9 +39,10 @@ function Feeling() {
         </div>
         <div className="submit">
 
-
           <Link to="/understand">
-            <button value="NEXT" onClick={handleSubmit}>NEXT</button>
+          {feelingValue > 0 ? <button value="NEXT" onClick={handleSubmit}> 
+              NEXT</button> : nothing }
+
           </Link>
         </div>
       </form>

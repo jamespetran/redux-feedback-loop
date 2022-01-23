@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 function Support() {
   let supportValue = useSelector(store => store.support);
   const history = useHistory();
+  const nothing = '';
 
 
   const handleSubmit = (event) => {
@@ -43,7 +44,8 @@ function Support() {
 
 
           <Link to="/support">
-            <button value="NEXT" onClick={handleSubmit}>NEXT</button>
+            {supportValue > 0 ? <button value="NEXT" onClick={handleSubmit}>
+              NEXT</button> : nothing}
           </Link>
         </div>
       </form>
