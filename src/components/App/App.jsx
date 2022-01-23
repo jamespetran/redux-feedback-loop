@@ -38,22 +38,6 @@ function App() {
           <ThankYou />
         </Route>
       </Router>
-
-
-      <br /><br /><br /><br /><br /><br /><br />
-      <p></p>// get rid of these in final product: 👈👇 
-      <ol>
-        <li>
-          Navigation:
-        </li>
-        <li>
-          input validation
-        </li>
-        <li>
-          POST to database
-        </li>
-      </ol>
-
     </div>
   );
 }

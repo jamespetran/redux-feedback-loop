@@ -12,9 +12,9 @@ function Feeling() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (feelingValue >0 ){
-    console.log('submitting feeling',feelingValue);
-    history.push('/understand');
+    if (feelingValue > 0) {
+      console.log('submitting feeling', feelingValue);
+      history.push('/understand');
     } else {
       alert('You must enter how you are feeling today to proceed')
     }
@@ -30,8 +30,8 @@ function Feeling() {
       <form className="form">
         <div className="input-box">
           <h3 className="question">Feeling?</h3>
-          <StarBar 
-            state= {feelingValue}
+          <StarBar
+            state={feelingValue}
             type_input="SUBMIT_FEELING"
           />
           {/* <input type="number" id="feeling-input" /> */}
@@ -40,7 +40,7 @@ function Feeling() {
 
 
           <Link to="/understand">
-            <input type="submit" value="NEXT" onClick={handleSubmit}/>
+            <button value="NEXT" onClick={handleSubmit}>NEXT</button>
           </Link>
         </div>
       </form>
