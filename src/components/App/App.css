@@ -21,17 +21,20 @@
 h4 {
   font-style: italic;
 }
+/* to make everything line up the way i want it to */
 .form{
   display: flex;
   flex-flow: column;
   margin: auto;
   width: fit-content;
 }
+/* to make everything line up the way i want it to */
 .input-box{
   display: flex;
   flex-flow: column;
   text-align: left;
 }
+/* to make everything line up the way i want it to */
 .page-content{
   width: 100%;
 }
