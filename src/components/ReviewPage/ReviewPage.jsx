@@ -2,24 +2,37 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 function Review() {
-  let feelingValue = useSelector(store => store.feeling);
-  let understandValue = useSelector(store => store.understand);
-  let supportValue = useSelector(store => store.support);
-  const commentValue = useSelector(store => store.comment);
+  const feeling = useSelector(store => store.feeling);
+  const understand = useSelector(store => store.understand);
+  const support = useSelector(store => store.support);
+  const comment = useSelector(store => store.comment);
 
   const handleSubmit = () => {
-    if( feelingValue > 0 && understandValue > 0 && supportValue > 0){
-      axios.post('/')
+    if( feeling > 0 && understand > 0 && support > 0){
+      const feedback={
+        feeling,
+        understand,
+        support,
+        comment
+      };
+      console.log(feedback);
+      axios.post('/api/feedback',feedback)
+        .then(response => {
+          console.log('success POST feedback', response);
+        })
+        .catch(err => {
+          console.error('error in POST feedback',err)
+        })
     }
   }
 
   return( 
     <div id="review">
       <h1>Review Your Feedback</h1>
-      <h3>Feelings: {feelingValue}</h3>
-      <h3>Understanding: {understandValue}</h3>
-      <h3>Support: {supportValue}</h3>
-      <h3>Comments: {commentValue}</h3>
+      <h3>Feelings: {feeling}</h3>
+      <h3>Understanding: {understand}</h3>
+      <h3>Support: {support}</h3>
+      <h3>Comments: {comment}</h3>
       <button onClick={handleSubmit}>SUBMIT</button>
     </div>
   )
