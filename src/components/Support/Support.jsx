@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 
 function Support() {
-  let supportValue = useSelector(store => store.support)
+  let supportValue = useSelector(store => store.support);
   const history = useHistory();
 
 

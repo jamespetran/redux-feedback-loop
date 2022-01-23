@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 
 function Understand() {
-  let understandValue = useSelector(store => store.understand)
+  let understandValue = useSelector(store => store.understand);
   const history = useHistory();
 
 
@@ -16,15 +16,13 @@ function Understand() {
       console.log('submitting understanding', understandValue);
       history.push('/support');
     } else {
-      alert('You must enter how well you are understanding the content to proceed')
+      alert('You must enter how well you are understanding the content to proceed');
     }
   }
 
   return (  
     <div id="understand" className="page-content">
-      <h1>
-        How well are you understanding the content?
-      </h1>
+      <h1>How well are you understanding the content?</h1>
       <form className="form">
         <div className="input-box">
           <h3 className="question">Understanding?</h3>
