@@ -57,15 +57,12 @@ function Review() {
         comment
       };
       console.log(feedback);
-      axios.post('/api/feedback', feedback)
-        .then(response => {
-          console.log('success POST feedback', response);
-          clearInputs();
-          history.push('/thank-you');
-        })
-        .catch(err => {
-          console.error('error in POST feedback', err)
-        })
+      dispatch({
+        type: 'SUBMIT_FEEDBACK',
+        payload: feedback
+      });
+      clearInputs();
+      history.push('/');
     } else {
       Swal.fire({
         title: 'Error!',
@@ -116,7 +113,7 @@ function Review() {
       </div>
 
       <h3>Comments: <span className="small">click the comment below to edit</span></h3>
-      
+
 
 
       {editComment ?
@@ -130,12 +127,12 @@ function Review() {
           />
           <button onClick={evt => submitComment()}>Set Comment</button>
         </div>
-        :<div>
-        {comment == "" ? <h5 onClick={evt => setEditComment(true)}>No comments submitted.</h5> : <h5 onClick={evt => setEditComment(true)}>{comment}</h5>}
-        <button onClick={handleSubmit}>SUBMIT</button>
+        : <div>
+          {comment == "" ? <h5 onClick={evt => setEditComment(true)}>No comments submitted.</h5> : <h5 onClick={evt => setEditComment(true)}>{comment}</h5>}
+          <button onClick={handleSubmit}>SUBMIT</button>
         </div>
       }
-      
+
     </div>
   )
 }

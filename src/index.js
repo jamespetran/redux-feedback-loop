@@ -5,7 +5,8 @@ import App from './components/App/App';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import logger from 'redux-logger'
+import logger from 'redux-logger';
+import axios from 'axios';
 
 // feeling reducer
 const feeling = (state = -1, action) => {
@@ -40,13 +41,31 @@ const comment = (state = "", action) => {
   return state
 }
 
+const feedback = (state = [], action) => {
+  switch (action.type) {
+    case 'SUBMIT_FEEDBACK':
+      //axios call here
+      axios.post('/api/feedback', action.payload)
+        .then(response => {
+          console.log('success POST feedback', response);
+        })
+        .catch(err => {
+          console.error('error in POST feedback', err)
+        })
+
+      return [];
+  }
+  return state
+}
+
 
 const store = createStore(
   combineReducers({
     feeling,
     understand,
     support,
-    comment
+    comment,
+    feedback
   }),
   applyMiddleware(logger)
 )
