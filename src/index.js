@@ -7,6 +7,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 // feeling reducer
 const feeling = (state = -1, action) => {
@@ -44,19 +45,21 @@ const comment = (state = "", action) => {
 const feedback = (state = [], action) => {
   switch (action.type) {
     case 'SUBMIT_FEEDBACK':
-      //axios call here
-      axios.post('/api/feedback', action.payload)
-        .then(response => {
-          console.log('success POST feedback', response);
-        })
-        .catch(err => {
-          console.error('error in POST feedback', err)
-        })
-
-      return [];
+      return action.payload;
+    case 'DELETE_FEEDBACK':
+      return action.payload;
   }
   return state
 }
+
+const feedbackList = (state = [], action) => {
+  switch (action.type) {
+    case 'REFRESH_LIST':
+      return action.payload;
+  }
+  return state;
+}
+
 
 
 const store = createStore(
@@ -65,12 +68,11 @@ const store = createStore(
     understand,
     support,
     comment,
-    feedback
+    feedback,
+    feedbackList
   }),
   applyMiddleware(logger)
 )
-
-
 
 ReactDOM.render(
   <Provider store={store}>

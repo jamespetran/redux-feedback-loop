@@ -57,10 +57,18 @@ function Review() {
         comment
       };
       console.log(feedback);
-      dispatch({
-        type: 'SUBMIT_FEEDBACK',
-        payload: feedback
-      });
+      axios.post('/api/feedback', feedback)
+      .then(response => {
+        console.log('success POST feedback', response);
+        dispatch({
+          type: 'SUBMIT_FEEDBACK',
+          payload: feedback
+        });  
+      })
+      .catch(err => {
+        console.error('error in POST feedback', err)
+      })
+
       clearInputs();
       history.push('/');
     } else {

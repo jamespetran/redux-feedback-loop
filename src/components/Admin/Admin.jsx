@@ -3,14 +3,14 @@ import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Button from '@mui/material/Button'
 
 function Admin() {
-  const [rows, setRows] = useState([]);
   const wrapper = React.useRef(null);
   const feedback = useSelector(store => store.feedback);
-
+  const feedbackList = useSelector(store => store.feedbackList);
+  const dispatch = useDispatch();
 
 
   const columns: GridColDef[] = [
@@ -63,29 +63,32 @@ function Admin() {
 
   const deleteRow = (id) => {
     axios.delete(`/api/feedback/${id}`)
-      .then( res =>{
-        console.log("delete feedback success",res);
-      })
-      .catch(err => {
-        console.error('deleted feedback fail', err);
-      });
-  }
+    .then(res => {
+      console.log("delete feedback success", res);
+      refreshList();
+    })
+    .catch(err => {
+      console.error('deleted feedback fail', err);
+    });
+}
 
-  const updateData = () => {
+  const refreshList = () => {
     axios.get('/api/feedback')
-      .then(res => {
-        console.log(res.data)
-        // considered adding the delete function call here but
-        // could not figure it out...
-        let newArray = (res.data)
-        setRows(newArray);
-        ;
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: 'REFRESH_LIST',
+        payload: res.data
       })
+    })
+    .catch(err => {
+      console.error('refresh feedback fail', err);
+    });
   }
 
   // trying to update the state of the data on the page
   // when feedback{} store object changes, but it dont work
-  useEffect(updateData, [feedback]);
+  useEffect(refreshList, [feedback]);
 
   return (
     <>
@@ -104,7 +107,7 @@ function Admin() {
         }}
       >
         <DataGrid
-          rows={rows}
+          rows={feedbackList}
           columns={columns}
           disableSelectionOnClick
         />
