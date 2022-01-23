@@ -54,9 +54,6 @@ padding: 10px;
 .question{
   margin: 0 auto 10px auto ;
 }
-.edit{
-  display:flex;
-  flex-flow: column;
-  width: 30%;
-  margin: 
+.small{
+  font-size:x-small;
 }

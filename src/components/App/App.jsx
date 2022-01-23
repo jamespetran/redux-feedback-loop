@@ -7,6 +7,7 @@ import Support from '../Support/Support';
 import Comment from '../Comment/Comment'
 import Review from '../ReviewPage/ReviewPage';
 import ThankYou from '../ThankYou/ThankYou';
+import Admin from '../Admin/Admin'
 
 function App() {
 
@@ -37,6 +38,10 @@ function App() {
         <Route path="/thank-you" exact>
           <ThankYou />
         </Route>
+        <Route path="/admin" exact>
+          <Admin />
+        </Route>
+
       </Router>
     </div>
   );

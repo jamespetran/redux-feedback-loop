@@ -115,7 +115,8 @@ function Review() {
         </div>
       </div>
 
-      <h3>Comments: </h3>
+      <h3>Comments: <span className="small">click the comment below to edit</span></h3>
+      
 
 
       {editComment ?
